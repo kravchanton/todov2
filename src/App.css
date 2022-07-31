@@ -2,6 +2,14 @@
   padding: 30px;
   display: flex;
 }
+.error {
+  border: red 1px solid;
+  outline:none
+}
+
+.error-message {
+  color: red;
+}
 
 .App > div {
   margin-right: 50px;
