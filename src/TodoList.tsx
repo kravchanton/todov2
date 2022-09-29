@@ -8,12 +8,14 @@ export type TaskType = {
 }
 
 type TodoListPropsType = {
+    id: string
     title: string
+    filter: string
     tasks: Array<TaskType>
-    removeTask: (id: string) => void
+    removeTask: (id: string, todoListId: string) => void
     setFilter: (value: filterValuesType) => void
-    addTask: (title: string) => void
-    changeTaskStatus: (id: string, isDone: boolean) => void
+    addTask: (title: string, todoListId: string) => void
+    changeTaskStatus: (id: string, isDone: boolean, todoListId: string) => void
 
 }
 
@@ -22,7 +24,7 @@ export const TodoList = (props: TodoListPropsType) => {
     let [error, setError] = useState<string | null>(null)
     let addTask = () => {
         if (title.trim() !== '') {
-            props.addTask(title.trim())
+            props.addTask(title.trim(), props.id)
             setTitle('')
         } else {
             setError('Title is required')
@@ -39,6 +41,7 @@ export const TodoList = (props: TodoListPropsType) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
+        setError(null)
     }
 
 
@@ -61,21 +64,27 @@ export const TodoList = (props: TodoListPropsType) => {
                 {props.tasks.length > 0 ? props.tasks.map(t => {
                     const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
 
-                        props.changeTaskStatus(t.id, e.currentTarget.checked)
+                        props.changeTaskStatus(t.id, e.currentTarget.checked, props.id)
                     }
                     return (
-                        <li>
+                        <li key={t.id} className={t.isDone === true ? 'is-done' : ''}>
                             <input type="checkbox" checked={t.isDone} onChange={changeTaskStatus}/>
                             <span>{t.title}</span>
-                            <button onClick={() => props.removeTask(t.id)}>✖</button>
+                            <button onClick={() => props.removeTask(t.id, props.id)}>✖</button>
                         </li>)
                 }) : "Tasks list is empty"}
 
             </ul>
             <div>
-                <button onClick={() => props.setFilter('all')}>All</button>
-                <button onClick={() => props.setFilter('active')}>Active</button>
-                <button onClick={() => props.setFilter('completed')}>Completed</button>
+                <button className={props.filter == 'all' ? 'active-filter' : ''}
+                        onClick={() => props.setFilter('all')}>All
+                </button>
+                <button className={props.filter == 'active' ? 'active-filter' : ''}
+                        onClick={() => props.setFilter('active')}>Active
+                </button>
+                <button className={props.filter == 'completed' ? 'active-filter' : ''}
+                        onClick={() => props.setFilter('completed')}>Completed
+                </button>
             </div>
         </div>
     )

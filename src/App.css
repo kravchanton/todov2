@@ -5,6 +5,13 @@
 .error {
   border: red 1px solid;
   outline:none
+
+}
+.is-done {
+  opacity: 0.5;
+}
+.active-filter {
+  background-color: aquamarine;
 }
 
 .error-message {
