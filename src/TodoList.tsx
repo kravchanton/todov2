@@ -53,7 +53,7 @@ let changeTodoListTitle= (title: string) => {
                     return (
                         <li key={t.id} className={t.isDone === true ? 'is-done' : ''}>
                             <input type="checkbox" checked={t.isDone} onChange={changeTaskStatus}/>
-                            <EditableSpan title={props.title} changeTitle={changeTaskTitle}/>
+                            <EditableSpan title={props.title} changegit Title={changeTaskTitle}/>
                             <button onClick={() => props.removeTask(t.id, props.id)}>✖</button>
                         </li>)
                 }) : "Tasks list is empty"}
