@@ -2,6 +2,7 @@ import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import {filterValuesType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import { Button } from '@mui/material';
 
 export type TaskType = {
     id: string
@@ -35,7 +36,7 @@ let changeTodoListTitle= (title: string) => {
     return (
         <div>
             <h3><EditableSpan title={props.title} changeTitle={changeTodoListTitle} />
-                <button onClick={() => props.removeTodoList(props.id)}>✖</button>
+                <Button onClick={() => props.removeTodoList(props.id)}>✖</Button>
             </h3>
 
 
@@ -53,22 +54,23 @@ let changeTodoListTitle= (title: string) => {
                     return (
                         <li key={t.id} className={t.isDone === true ? 'is-done' : ''}>
                             <input type="checkbox" checked={t.isDone} onChange={changeTaskStatus}/>
-                            <EditableSpan title={props.title} changegit Title={changeTaskTitle}/>
-                            <button onClick={() => props.removeTask(t.id, props.id)}>✖</button>
+                            <EditableSpan title={props.title} changeTitle={changeTaskTitle}/>
+                            <Button onClick={() => props.removeTask(t.id, props.id)}>✖</Button>
                         </li>)
                 }) : "Tasks list is empty"}
 
             </ul>
             <div>
-                <button className={props.filter === 'all' ? 'active-filter' : ''}
+                <Button
+                    variant={props.filter === 'all' ? "contained" : "outlined"}
                         onClick={() => props.changeFilter('all', props.id)}>All
-                </button>
-                <button className={props.filter === 'active' ? 'active-filter' : ''}
+                </Button>
+                <Button variant={props.filter === 'active' ? "contained" : "outlined"}
                         onClick={() => props.changeFilter('active', props.id)}>Active
-                </button>
-                <button className={props.filter === 'completed' ? 'active-filter' : ''}
+                </Button>
+                <Button variant={props.filter === 'completed' ? "contained" : "outlined"}
                         onClick={() => props.changeFilter('completed', props.id)}>Completed
-                </button>
+                </Button>
             </div>
         </div>
     )
