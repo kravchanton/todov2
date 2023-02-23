@@ -38,7 +38,7 @@ export const TodoList = (props: TodoListPropsType) => {
     return (
         <div>
             <h3><EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
-                <IconButton aria-label="delete" onClick={() => props.removeTodoList(props.id)}>
+                <IconButton aria-label="delete"  onClick={() => props.removeTodoList(props.id)}>
                     <DeleteIcon/>
                 </IconButton>
             </h3>

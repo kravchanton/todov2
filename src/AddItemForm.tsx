@@ -40,8 +40,7 @@ export const AddItemForm = (props: addItemFormType) => {
                    onKeyDown={onKeyDownAddTask}
                    className={error ? 'error' : ''}
             />
-            <Button variant="outlined" onClick={addItem}>+</Button>
-            <Button style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}/>
+            <Button variant="outlined" size="small" sx={{ml: "1px"}} onClick={addItem}>+</Button>
 
             {error && <div className={'error-message'}>{error}</div>}
         </div>
