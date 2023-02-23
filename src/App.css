@@ -7,6 +7,13 @@
   outline:none
 
 }
+
+ul {
+  padding-left: 0;
+}
+li {
+  list-style-type: none;
+}
 .is-done {
   opacity: 0.5;
 }
