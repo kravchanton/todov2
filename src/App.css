@@ -1,12 +1,4 @@
-.App {
-  padding: 30px;
-  display: flex;
-}
-.error {
-  border: red 1px solid;
-  outline:none
 
-}
 
 ul {
   padding-left: 0;
@@ -14,16 +6,12 @@ ul {
 li {
   list-style-type: none;
 }
+
 .is-done {
   opacity: 0.5;
 }
-.active-filter {
-  background-color: aquamarine;
-}
 
-.error-message {
-  color: red;
-}
+
 
 .App > div {
   margin-right: 50px;

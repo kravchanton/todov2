@@ -3,6 +3,7 @@ import './App.css';
 import {TodoList} from "./TodoList";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
+import {AppBar, IconButton, Menu, Toolbar, Typography} from "@mui/material";
 
 
 
@@ -87,6 +88,21 @@ function App() {
 
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
+                    >
+                    </IconButton>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        TodoLists
+                    </Typography>
+                </Toolbar>
+            </AppBar>
             <AddItemForm addItem={addTodoList} />
             {
                 todoLists.map(t => {

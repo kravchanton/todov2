@@ -2,8 +2,9 @@ import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import {filterValuesType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
-import {Button, Checkbox, IconButton} from '@mui/material';
+import {Button, ButtonGroup, Checkbox, IconButton} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 
 export type TaskType = {
@@ -38,7 +39,7 @@ export const TodoList = (props: TodoListPropsType) => {
     return (
         <div>
             <h3><EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
-                <IconButton aria-label="delete"  onClick={() => props.removeTodoList(props.id)}>
+                <IconButton aria-label="delete" sx={{"&:hover":{color: "blue"}}}  onClick={() => props.removeTodoList(props.id)}>
                     <DeleteIcon/>
                 </IconButton>
             </h3>
@@ -60,27 +61,30 @@ export const TodoList = (props: TodoListPropsType) => {
 
                             <input type="checkbox" checked={t.isDone} onChange={changeTaskStatus}/>
                             <EditableSpan title={props.title} changeTitle={changeTaskTitle}/>
-                            <Button onClick={() => props.removeTask(t.id, props.id)}>✖</Button>
+                            <IconButton aria-label="delete" onClick={() => props.removeTask(t.id, props.id)}>
+                                <HighlightOffIcon/>
+                            </IconButton>
+
                         </li>)
                 }) : "Tasks list is empty"}
 
             </ul>
             <div>
-                <Button
-                    size="small"
-                    variant={props.filter === 'all' ? "contained" : "outlined"}
-                    onClick={() => props.changeFilter('all', props.id)}>All
-                </Button>
-                <Button
-                    size="small"
-                    variant={props.filter === 'active' ? "contained" : "outlined"}
-                    onClick={() => props.changeFilter('active', props.id)}>Active
-                </Button>
-                <Button
-                    size="small"
-                    variant={props.filter === 'completed' ? "contained" : "outlined"}
-                    onClick={() => props.changeFilter('completed', props.id)}>Completed
-                </Button>
+                <ButtonGroup  size="small">
+                    <Button
+                        variant={props.filter === 'all' ? "contained" : "outlined"}
+                        onClick={() => props.changeFilter('all', props.id)}>All
+                    </Button>
+                    <Button
+                        variant={props.filter === 'active' ? "contained" : "outlined"}
+                        onClick={() => props.changeFilter('active', props.id)}>Active
+                    </Button>
+                    <Button
+                        variant={props.filter === 'completed' ? "contained" : "outlined"}
+                        onClick={() => props.changeFilter('completed', props.id)}>Completed
+                    </Button>
+                </ButtonGroup>
+
             </div>
         </div>
     )
