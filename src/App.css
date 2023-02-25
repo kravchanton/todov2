@@ -1,4 +1,6 @@
-
+body{
+  background-color: #e7ebf0;
+}
 
 ul {
   padding-left: 0;
@@ -14,5 +16,4 @@ li {
 
 
 .App > div {
-  margin-right: 50px;
 }

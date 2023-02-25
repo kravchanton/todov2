@@ -1,9 +1,21 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import './App.css';
 import {TodoList} from "./TodoList";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
-import {AppBar, IconButton, Menu, Toolbar, Typography} from "@mui/material";
+import {
+    AppBar,
+    Button,
+    ButtonGroup,
+    Card,
+    CardContent,
+    Container,
+    IconButton,
+    Toolbar,
+    Typography
+} from "@mui/material";
+import Grid from '@mui/material/Unstable_Grid2';
+import {Menu} from '@mui/icons-material';
 
 
 
@@ -75,10 +87,10 @@ function App() {
         let newTodoListId = v1()
         let newTodoList: TodoListType = {id: newTodoListId, title, filter: 'all'}
         setTodoLists([newTodoList, ...todoLists])
-        setTasks({[newTodoListId]:[], ...tasks})
+        setTasks({[newTodoListId]: [], ...tasks})
     }
 
-    const changeTaskTitle = (title: string, todoListId: string, id: string ) => {
+    const changeTaskTitle = (title: string, todoListId: string, id: string) => {
         setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === id ? {...t, title: title} : t)})
     }
 
@@ -95,45 +107,61 @@ function App() {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2 }}
+                        sx={{mr: 2}}
                     >
+                        <Menu/>
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         TodoLists
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <AddItemForm addItem={addTodoList} />
-            {
-                todoLists.map(t => {
+            <Container>
+                <Grid
+                    container
+                    sx={{m: 1}}>
+                    <Card sx={{minWidth: 27}}>
+                        <CardContent>
+                            <AddItemForm addItem={addTodoList}/>
+                        </CardContent>
+                    </Card>
 
-                    let tasksForTodoList = tasks[t.id]
+                </Grid>
+                <Grid container>
+                    {
+                        todoLists.map(t => {
 
-                    if (t.filter === 'active') {
-                        tasksForTodoList = tasks[t.id].filter(t => t.isDone === false)
+                            let tasksForTodoList = tasks[t.id]
 
+                            if (t.filter === 'active') {
+                                tasksForTodoList = tasks[t.id].filter(t => t.isDone === false)
+
+                            }
+                            if (t.filter === 'completed') {
+                                tasksForTodoList = tasks[t.id].filter(t => t.isDone === true)
+
+                            }
+                            return (
+                                <TodoList key={t.id}
+                                          id={t.id}
+                                          title={t.title}
+                                          tasks={tasksForTodoList}
+                                          removeTask={removeTask}
+                                          removeTodoList={removeTodoList}
+                                          changeFilter={changeFilter}
+                                          addTask={addTask}
+                                          filter={t.filter}
+                                          changeTaskStatus={changeTaskStatus}
+                                          changeTaskTitle={changeTaskTitle}
+                                          changeTodoListTitle={changeTodoListTitle}
+                                />
+                            )
+                        })
                     }
-                    if (t.filter === 'completed') {
-                        tasksForTodoList = tasks[t.id].filter(t => t.isDone === true)
+                </Grid>
 
-                    }
-                    return (
-                            <TodoList key={t.id}
-                                      id={t.id}
-                                      title={t.title}
-                                      tasks={tasksForTodoList}
-                                      removeTask={removeTask}
-                                      removeTodoList={removeTodoList}
-                                      changeFilter={changeFilter}
-                                      addTask={addTask}
-                                      filter={t.filter}
-                                      changeTaskStatus={changeTaskStatus}
-                                      changeTaskTitle = {changeTaskTitle}
-                                      changeTodoListTitle={changeTodoListTitle}
-                            />
-                )
-                })
-            }
+            </Container>
+
         </div>
     )
 }
