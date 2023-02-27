@@ -20,17 +20,17 @@ import {Menu} from '@mui/icons-material';
 
 
 export type filterValuesType = 'all' | 'active' | 'completed'
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     filter: filterValuesType
 }
-type TaskType = {
+export type TaskType = {
     id: string,
     title: string,
     isDone: boolean
 }
-type TasksStateType = {
+ export type TasksStateType = {
     [todoLisId: string]: Array<TaskType>
 }
 
