@@ -1,8 +1,8 @@
-import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
-import {filterValuesType} from "./App";
+import React, {ChangeEvent} from 'react';
+import {FilterValuesType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
-import {Button, ButtonGroup, Card, CardContent, Checkbox, IconButton} from '@mui/material';
+import {Button, ButtonGroup, Card, CardContent, IconButton} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
@@ -20,7 +20,7 @@ type TodoListPropsType = {
     tasks: Array<TaskType>
     removeTask: (id: string, todoListId: string) => void
     removeTodoList: (todoListId: string) => void
-    changeFilter: (value: filterValuesType, todoListId: string) => void
+    changeFilter: (value: FilterValuesType, todoListId: string) => void
     addTask: (title: string, todoListId: string) => void
     changeTaskStatus: (id: string, isDone: boolean, todoListId: string) => void
     changeTaskTitle: (title: string, todoListId: string, id: string) => void
@@ -28,7 +28,7 @@ type TodoListPropsType = {
 
 }
 
-export const TodoList = (props: TodoListPropsType) => {
+export const TodoList = (props: TodoListPropsType, m: number = 2) => {
     let addTask = (title: string) => {
         props.addTask(title, props.id)
     }
@@ -37,7 +37,7 @@ export const TodoList = (props: TodoListPropsType) => {
     }
 
     return (
-        <Card sx={{ m: 2}}>
+        <Card sx={{ m: m}}>
             <CardContent>
                 <div>
                     <h3><EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>

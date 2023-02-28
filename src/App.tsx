@@ -1,29 +1,18 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {TodoList} from "./TodoList";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
-import {
-    AppBar,
-    Button,
-    ButtonGroup,
-    Card,
-    CardContent,
-    Container,
-    IconButton,
-    Toolbar,
-    Typography
-} from "@mui/material";
+import {AppBar, Card, CardContent, Container, IconButton, Toolbar, Typography} from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import {Menu} from '@mui/icons-material';
 
 
-
-export type filterValuesType = 'all' | 'active' | 'completed'
+export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TodoListType = {
     id: string
     title: string
-    filter: filterValuesType
+    filter: FilterValuesType
 }
 export type TaskType = {
     id: string,
@@ -73,7 +62,7 @@ function App() {
     const changeTaskStatus = (id: string, isDone: boolean, todoListId: string) => {
         setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === id ? {...t, isDone: isDone} : t)})
     }
-    let changeFilter = (value: filterValuesType, todoListId: string) => {
+    let changeFilter = (value: FilterValuesType, todoListId: string) => {
         setTodoLists(todoLists.map(t => t.id === todoListId ? {...t, filter: value} : t))
 
     }
