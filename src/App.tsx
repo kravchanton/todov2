@@ -7,6 +7,7 @@ import {AppBar, Card, CardContent, Container, IconButton, Toolbar, Typography} f
 import Grid from '@mui/material/Unstable_Grid2';
 import {Menu} from '@mui/icons-material';
 import {todolistsReducer} from "./store/todolists-reducer";
+import {tasksReducer} from "./store/task-reducer";
 
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
@@ -54,7 +55,19 @@ function App() {
         ])
 
 
+    const tasks = useReducer(tasksReducer, {
+        [todoLisId_1]: [
+            {id: v1(), title: 'HTML', isDone: true},
+            {id: v1(), title: 'CSS', isDone: false},
+            {id: v1(), title: 'JS', isDone: false},
+        ],
+        [todoLisId_2]: [
+            {id: v1(), title: 'beer', isDone: true},
+            {id: v1(), title: 'milk', isDone: false},
+            {id: v1(), title: 'meat', isDone: false},
+        ],
 
+    })
 
     return (
         <div className="App">
