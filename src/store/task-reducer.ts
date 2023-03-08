@@ -15,6 +15,7 @@ type AddTaskType = ReturnType<typeof addTaskAC>
 type ChangeTaskStatusType = ReturnType<typeof changeTaskStatusAC>
 type ChangeTaskTitleType = ReturnType<typeof changeTaskTitleAC>
 
+let initialState: TasksStateType = {}
 
 export const tasksReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
     switch (action.type) {
@@ -52,9 +53,9 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
             let stateCopy = {...state}
             delete stateCopy[action.id]
             return stateCopy
-
         default:
-            throw new Error("Error")
+            return state || initialState
+
     }
 
 }
